@@ -1,0 +1,29 @@
+<table class="table table-striped table-hover table-bordered">
+    <!-- Crear fila - tr -->
+    <tr>
+        <!-- Crear encabezados -header - th -->
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Destinatario</th>
+        <th>Asunto</th>
+        <th>Mensaje</th>
+    </tr>
+
+    <!-- Construye la tabla con el bucle for con Jinja - La pasa a la funcion JS verHistorial-->
+    {% for m in datas %}
+    <tr>
+        <!-- Colocar  los atributos de acuerdo a la BD -->
+        <td>{{ m['fecha'] }}</td>
+        <td>{{ m['hora'] }}</td>
+        <td>{{ m['userName'] }}</td>
+        <td>{{ m['asunto'] }}</td>
+        <td>{{ m['mensaje'] }}</td>
+    </tr>      
+    
+
+    {% endfor %}
+
+
+
+
+</table>
