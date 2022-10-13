@@ -19,84 +19,152 @@
   <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/summernote/summernote-bs4.min.css">
+
+  <!-- plantilla -->
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <!-- Our Custom CSS -->
+  <link rel="stylesheet" href="static/css/style.css">
+
+  <!-- Font Awesome JS -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+    integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+    integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+    crossorigin="anonymous"></script>
+
+  <!-- Agregar Fontawesome - Iconos para Pagina -->
+  <script src="https://kit.fontawesome.com/b6eb889ff5.js" crossorigin="anonymous"></script>
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
-  <div class="wrapper">
-
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png" alt="AdminLTELogo"
-        height="60" width="60">
+<body>
+  
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-mailchimp'></i>
+        <div class="logo_name">MexNorte</div>
+        <i class='bx bx-menu' id="btn" ></i>
     </div>
+    <ul class="nav list-unstyled components">
+      <li>
+          <i class='bx bx-search' ></i>
+         <input type="text" placeholder="Search...">
+         <span class="tooltip">Search</span>
+      </li>
+      <li class="nav-item">
+        <a class= 'nav-item' href="#tab_1" data-toggle="tab">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">Dashboard</span>
+        </a>
+         <span class="tooltip">Dashboard</span>
+      </li>
+      <li class="nav-item">
+       <a class= 'nav-item' href="#tab_2" onclick="verHistorial()" data-toggle="tab">
+         <i class='fa-regular fa-paper-plane mr-1' ></i>
+         <span class="links_name">Enviados</span>
+       </a>
+       <span class="tooltip">Enviados</span>
+     </li class="nav-item">
+     <li>
+       <a class= 'nav-item' href="#tab_4" onclick="verRecibidos()" data-toggle="tab">
+        <i class='bx bxs-inbox'></i>
+         <span class="links_name">Recibidos</span>
+       </a>
+       <span class="tooltip">Recibidos</span>
+     </li>
+     <li>
+       <a class= 'nav-item' href="#tab_3" data-toggle="tab">
+         <i class='bx bxs-key' ></i>
+         <span class="links_name">Contraseña</span>
+       </a>
+       <span class="tooltip">Contraseña</span>
+     </li>
 
-
-    <div class="">
-
-      <section class="content">
-        <div class="container-fluid">
-          <div class="contariner alert alert-info">
-            <h2>Mensajes UniNorte</h2>
+     <li>
+       <a href="#">
+         <i class='bx bx-cog' ></i>
+         <span class="links_name">Settings</span>
+       </a>
+       <span class="tooltip">Settings</span>
+     </li>
+     <li class="profile" >
+      <a href="/cerrarSesion">
+        <div class="profile-details">
+          <img src="static/images/profile.jpg" alt="profileImg">
+          <div class="name_job">
+            <div class="name">{{usuario}}</div>
           </div>
-<!-- 
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Mensajes Uninorte</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarText">
-                <span class="navbar-text">
-                  <a href="/">
-                    <button class="btn btn-danger">Cerrar Sesión</button>
-                  </a>
-                </span>
+        </div>
+        <i class='bx bx-log-out' id="log_out" ></i>
+      </a>
+     </li>
+    </ul>
+  </div>
 
-                <span class="navbar-text">
-                  Texto con un elemento en línea
-                </span>
 
-              </div>
-            </div>
-          </nav> -->
 
-<!-- 
-          <nav class="navbar navbar-light bg-light">
-            <div class="container-fluid">
-              <a class="navbar-brand">Mensajes UniNorte</a>
-              <form class="d-flex" role="search">
-                <span class="navbar-text">
-                  Texto con un elemento en línea
-                </span>
-                <a href="/">
-                  <button class="btn btn-danger me-2 ml-3">Cerrar Sesión</button>
-                </a>
-              </form>
-            </div>
-          </nav> -->
 
+
+
+    <!-- Page Content  -->
+    <div id="content">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+          </button>
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-align-justify"></i>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#"> <i class="fa-solid fa-user"></i> {{usuario}}</a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+          <img class="animation__shake" src="https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png" alt="AdminLTELogo"
+            height="60" width="60">
+        </div>
+    
+      </div>
+
+      <section class="container">
+        <div class="container-fluid">
+          <div class="container alert alert-info">
+            
+            <h2><center>Mensajería Electrónica</center></h2>
+          </div>
 
           <div class=" row">
-            <div class="col-12">
+            <div class="col">
               <!-- Custom Tabs -->
               <div class="card">
                 <div class="card-header d-flex p-0">
-                  <h3 class="card-title p-3">
+                  <h3 class="card-title p-3"></h3>
                     <!-- Agregar boton de cerrar sesion -->
-                    <a href="/">
-                      <button class="btn btn-danger">Cerrar Sesión</button>
-                    </a>
-                  </h3>
-                  <ul class="nav nav-pills ml-auto p-2">
-                    <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Gestion de Envio</a>
-                    </li>
-
-                    <!-- Crear un metodo para ver historial -->
-                    <li class="nav-item" onclick="verHistorial()"><a class="nav-link" href="#tab_2"
-                        data-toggle="tab">Historial</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">Contraseña</a></li>
-
-                  </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
                   <div class="tab-content">
@@ -107,7 +175,7 @@
                       <form onsubmit="return enviarMail()">
                         <!-- Asunto -->
                         <input required id="txtAsunto" name="txtAsunto" class="form-control" type="text"
-                          placeholder="Asunto:" max="50">
+                          placeholder="Asunto:" max="5">
                         <!-- Separación de linea hr -->
                         <hr>
                         <!-- Coloco la info de la BD - Con Jinja 2-->
@@ -139,12 +207,23 @@
                       <!-- Incluir un div - Con una clase row - para distribuir columnas -->
                       <div class="row">
                         <!-- Dividir la pantalla por la mitad de 6 y 6 -->
-                        <div class="col-6" id="d_enviados" name="d_enviados">
+                        <div class="col-12" id="d_enviados" name="d_enviados">
                           Aqui se visualiza los correos ENVIADOS
 
                         </div>
 
-                        <div class="col-6" id="d_recibidos" name="d_recibidos">
+
+                      </div>
+
+                    </div>
+
+                    <div class="tab-pane" id="tab_4">
+
+                      <!-- Incluir un div - Con una clase row - para distribuir columnas -->
+                      <div class="row">
+                        <!-- Dividir la pantalla por la mitad de 6 y 6 -->
+
+                        <div class="col-12" id="d_recibidos" name="d_recibidos">
                           Aqui se visualiza los correos RECIBIDOS
 
                         </div>
@@ -153,19 +232,22 @@
                       </div>
 
                     </div>
+
+
                     <!-- /.tab-pane - Pestaña para hacer modificación de la contraseña-->
                     <div class="tab-pane" id="tab_3">
                       <center class="alert alert-info">
-                        <h3>Cambio de Contraseña</h3> </center>
+                        <h3>Cambio de Contraseña</h3>
+                      </center>
+                      <hr>
+                      <form onsubmit="return cambioPassword()">
+                        Nueva Contraseña
+                        <input type="password" class="form-control" id="txtpass1" name="txtpass1">
+                        Confirmar Contraseña
+                        <input type="password" class="form-control" id="txtpass2" name="txtpass2">
                         <hr>
-                        <form onsubmit="return cambioPassword()">
-                          Nueva Contraseña
-                          <input type="password" class="form-control" id="txtpass1" name="txtpass1">
-                          Confirmar Contraseña
-                          <input type="password" class="form-control" id="txtpass2" name="txtpass2">
-                          <hr>
-                          <button type="submit" class="btn btn-info">Actualizar</button>
-                        </form>
+                        <button type="submit" class="btn btn-info">Actualizar</button>
+                      </form>
                     </div>
                     <!-- /.tab-pane -->
                   </div>
@@ -181,16 +263,12 @@
           <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
       </section>
-      <!-- /.content -->
-    </div>
+
+      </div>
 
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-  </div>
+
+
   <!-- ./wrapper -->
 
   <!-- jQuery -->
@@ -213,6 +291,8 @@
   <script src="https://adminlte.io/themes/v3/dist/js/adminlte.js"></script>
   <script src="https://adminlte.io/themes/v3/dist/js/pages/dashboard.js"></script>
 
+
+  <script src="static/js/script.js"></script>
 
   <script>
 
@@ -267,8 +347,11 @@
       });
 
 
-      /////////////////////////
-      // Usando el procedimiento ajax - Historial de recibidos - Cambiar el ID correspondiente
+    }
+
+  function verRecibidos() {
+
+     // Usando el procedimiento ajax - Historial de recibidos - Cambiar el ID correspondiente
       $.ajax({
         url: 'historialRecibidos',
         // Importante - Colocar # Para referenciar al ID
@@ -283,7 +366,8 @@
         }
       });
 
-    }
+}
+
 
     function cambioPassword() {
 
@@ -291,23 +375,23 @@
       if ($("#txtpass1").val() == $("#txtpass2").val()) {
 
         // Usando el procedimiento ajax - Para que se haga directamente en pantalla
-      $.ajax({
-        url: 'actualizarPassword',
-        // Importante - Colocar # Para referenciar al ID - Solo se coloca un password
-        data: "passw=" +$("#txtpass1").val(),
-        type: 'POST',
-        // Funcion que publica mensaje de esa ruta
-        success: function (r) {
-          alert(r)
-        },
-        error: function (xhr, status) {
-          alert('Error: Intente en otro momento')
-        }
-      }); 
+        $.ajax({
+          url: 'actualizarPassword',
+          // Importante - Colocar # Para referenciar al ID - Solo se coloca un password
+          data: "passw=" + $("#txtpass1").val(),
+          type: 'POST',
+          // Funcion que publica mensaje de esa ruta
+          success: function (r) {
+            alert(r)
+          },
+          error: function (xhr, status) {
+            alert('Error: Intente en otro momento')
+          }
+        });
 
       }
-      else{
-          alert('Error: Las contraseñas NO coinciden!!!');
+      else {
+        alert('Error: Las contraseñas NO coinciden!!!');
 
       }
 

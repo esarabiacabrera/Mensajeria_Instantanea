@@ -1,11 +1,13 @@
 # Importar librerias de Flask
 # Render Template - Retornar o llamar una plantilla en HTML
-from flask import Flask, render_template, request, flash, session
+import email
+from flask import Flask, render_template, request, flash, session, redirect
 
 import os
 
 # Importar la libreria seguridad
 from werkzeug.security import generate_password_hash, check_password_hash
+import utils
 
 
 # Encriptar el password mediante hash
@@ -53,9 +55,9 @@ def validarUsuario():
             if(check_password_hash(claveHash, passw)):
                 email_origen = user
                 session['usuario']= user #creación de la variable de sesion
-                flash("Usuario Logueado, "+usuario_bd)
+              #  flash("Usuario Logueado, "+usuario_bd)
                 listaUsua=controlador.listarDestinatarios(user)
-                return render_template('principal.html', datas = listaUsua)
+                return render_template('principal.html', datas = listaUsua,usuario=usuario_bd)
 
             else:
                 mensaje = "Error: Auntenticación!!! Lo invitamos a verificar su usuario(correo) y contraseña"
@@ -77,6 +79,25 @@ def registrarUsuario():
         email = email.replace("SELECT","").replace("INSERT","").replace("DELETE","").replace("UPDATE","").replace("WHERE","")
         passw = request.form["txtpassregistro"]
 
+        if not name:
+          error = 'Debes ingresar el nombre del usuario'
+          flash( error )
+          return render_template( 'login.html' )
+
+        if not utils.isUsernameValid( name ):
+            error = "El usuario debe ser alfanumerico o incluir solo '.','_','-'"
+            flash( error )
+            return render_template( 'login.html' )
+
+        if not utils.isPasswordValid( passw ):
+            error = 'La contraseña debe contenir al menos una minúscula, una mayúscula, un número, un caracter especial y 8 caracteres'
+            flash( error )
+            return render_template( 'login.html' )
+
+        if not utils.isEmailValid( email ):
+            error = 'Correo invalido'
+            flash( error )
+            return render_template( 'login.html' )
 
         hashClave = generate_password_hash(passw)
         passw2 = hashClave
@@ -185,3 +206,41 @@ def actualizarPassword():
         respuesta = controlador.actualizarPass(passw2, email_origen)
 
         return "Actualización de Contraseña satisfactoria!!"+ passw2 + email_origen
+
+@app.route("/cerrarSesion")
+def cerrarSesion():
+  session.clear()
+  flash('Sesión cerrada')
+  return redirect('/')
+
+@app.route("/recuperarContrasenia", methods=['GET','POST'])
+def recuperarContrasenia():
+  if request.method == "POST":
+    email = request.form["emailRecuperar"]
+
+  email = email.replace("SELECT","").replace("INSERT","").replace("DELETE","").replace("UPDATE","").replace("WHERE","")
+  respuesta = controlador.validarUsuario(email)
+
+  if respuesta!= None:
+    # Generar codigo de activacion - Trae fecha (2022-10-05) y horas - 18:39:15.032274
+    codigo = datetime.now()   #Trae la hora y fecha actual
+    print(codigo)
+    # Eliminar caracteres que no sean numericos
+    codigo2 = str(codigo)
+    codigo2 = codigo2.replace("-", "")
+    codigo2 = codigo2.replace(" ", "")
+    codigo2 = codigo2.replace(":", "")
+    codigo2 = codigo2.replace(".", "")
+
+    hashClave = generate_password_hash(codigo2)
+    passw2 = hashClave
+    respuesta2 = controlador.actualizarPass(passw2, email)
+    # Generalizar mensaje enviado por correo
+    mensaje = "Sr {0}, usuario su clave tesmporal es :\n\n {1} \n\n Recuerde copiarla y pegarla; posteriormente cambie la contraseña.\n\nMuchas Gracias".format(respuesta[0],codigo2)
+
+    # Enviarle el codigo de activacion a la persona registrada - Agregar mensaje en el medio
+    envioemail.enviar(email,mensaje,"Recuperar contraseña")
+    return redirect('/')
+
+
+
